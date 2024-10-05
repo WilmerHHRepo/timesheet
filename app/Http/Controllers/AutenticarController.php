@@ -2,13 +2,17 @@
 // app/Http/Controllers/BusquedaController.php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\TblRecurso; // Asumiendo que ya has cambiado el modelo User a TblRecurso
 
 class AutenticarController extends Controller
 {
+
     public function buscarLogin(Request $request)
     {
+
+
         // Validar los campos de entrada
         $request->validate([
             'Rcso_Email1' => 'required|string',
@@ -28,7 +32,22 @@ class AutenticarController extends Controller
             //     'nombre' => $request->Rcso_Email1,
             //     'email' => $request->Rcso_Contrasena,
             // ]);
+
+
+            // Almacenar un valor en la sesión
+            Session::put('nombre', $request->Rcso_Nombres);
+
+
+            // // Almacenar varios valores a la vez
+            // Session::put([
+            //     'nombre' => $request->Rcso_Nombres,
+            //     'email' => $request->Rcso_Email1,
+            // ]);
+
             return view('bienvenido');
+
+            // Redirigir a la vista que mostrará el valor
+            // return redirect()->route('bienvenido');
 
         } else {
             // return view('resultados', ['existe' => false]);
@@ -37,15 +56,7 @@ class AutenticarController extends Controller
                 'nombre' => $request->Rcso_Email1,
                 'email' => $request->Rcso_Contrasena,
             ]);
-
-
-
-
-
         }
-
-
-
     }
 
     public function index()
