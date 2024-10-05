@@ -22,10 +22,30 @@ class AutenticarController extends Controller
 
         // Verificar si el registro existe
         if ($registro) {
-            return view('resultados', ['existe' => true, 'registro' => $registro]);
+            // return view('resultados', ['existe' => true, 'registro' => $registro]);
+            // return response()->json([
+            //     'message' => ['existe' => true, 'registro' => $registro],
+            //     'nombre' => $request->Rcso_Email1,
+            //     'email' => $request->Rcso_Contrasena,
+            // ]);
+            return view('bienvenido');
+
         } else {
-            return view('resultados', ['existe' => false]);
+            // return view('resultados', ['existe' => false]);
+            return response()->json([
+                'message' => ['existe' => false],
+                'nombre' => $request->Rcso_Email1,
+                'email' => $request->Rcso_Contrasena,
+            ]);
+
+
+
+
+
         }
+
+
+
     }
 
     public function index()
